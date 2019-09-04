@@ -10,15 +10,5 @@ public interface UserService {
 
     UserDto getUserById(Long userId);
     UserDto getByUsername(String username);
-    List<UserDto> getAllOnPage(int pageNumber);
-
-    List<UserDto> getAllUserByFilter(FilterUserDto filterUser, Integer pageNumber);
-    Integer getNumberUserAvailablePageByFilter(FilterUserDto filterUser);
-
-    Boolean createUser(UserDto newUser);
-    UserDto updateUser(UserDto updatedUser);
-    UserDto changePassword(UserDto user) throws CustomizeException;
-
-    Boolean banUser(Long userId);
 
 }
