@@ -2,9 +2,9 @@ package com.project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.project.dto.JwtAuthenticationResponse;
-import com.project.dto.LoginRequest;
-import com.project.dto.SignUpRequest;
+import com.project.dto.response.JwtAuthenticationResponse;
+import com.project.dto.request.LoginRequest;
+import com.project.dto.request.SignUpRequest;
 import com.project.service.AuthService;
 
 import javax.validation.Valid;

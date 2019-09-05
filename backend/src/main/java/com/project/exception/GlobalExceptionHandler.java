@@ -1,4 +1,4 @@
-package com.project.controller;
+package com.project.exception;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
-import com.project.exception.BadRequestException;
-import com.project.exception.ConflictException;
-import com.project.dto.ErrorResponse;
-import com.project.exception.NotFoundException;
+import com.project.dto.response.ErrorResponse;
 
 @RestControllerAdvice
 @Slf4j
