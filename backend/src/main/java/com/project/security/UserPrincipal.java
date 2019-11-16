@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.project.model.User;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,21 +16,29 @@ public class UserPrincipal implements UserDetails {
 
     private Long id;
 
-    private String name;
+    private String firstName;
 
-    @JsonIgnore
+    private String lastName;
+
     private String email;
 
     @JsonIgnore
     private String password;
 
+    private Date creationDate;
+
+    private Date lastModificationDate;
+
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserPrincipal(Long id, String name, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String firstName, String lastName, String email, String password, Date creationDate, Date lastModificationDate, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.creationDate = creationDate;
+        this.lastModificationDate = lastModificationDate;
         this.authorities = authorities;
     }
 
@@ -40,9 +49,12 @@ public class UserPrincipal implements UserDetails {
 
         return new UserPrincipal(
                 user.getId(),
-                user.getName(),
+                user.getFirstName(),
+                user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getCreationDate(),
+                user.getLastModificationDate(),
                 authorities
         );
     }
@@ -51,14 +63,27 @@ public class UserPrincipal implements UserDetails {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Date getLastModificationDate() {
+        return lastModificationDate;
+    }
+
+    //Todo: ??? potrzebne??
     @Override
     public String getUsername() {
         return email;
@@ -107,4 +132,6 @@ public class UserPrincipal implements UserDetails {
 
         return Objects.hash(id);
     }
+
+
 }

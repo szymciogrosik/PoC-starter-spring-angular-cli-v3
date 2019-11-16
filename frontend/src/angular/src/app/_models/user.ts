@@ -1,15 +1,13 @@
 ﻿import {Role} from './role';
 
 export class User {
-    userId: number;
-    username: string;
+    id: number;
     password: string;
     firstName: string;
     lastName: string;
     email: string;
-    banned: boolean;
-    accountCreation: Date;
-    lastModification: Date;
+    creationDate: Date;
+    lastModificationDate: Date;
     token: string;
     roles: Role[];
 }

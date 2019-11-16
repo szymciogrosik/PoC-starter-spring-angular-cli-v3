@@ -11,7 +11,10 @@ public class UserService {
         return UserSummary.builder()
                 .id(userPrincipal.getId())
                 .email(userPrincipal.getEmail())
-                .name(userPrincipal.getName())
+                .firstName(userPrincipal.getFirstName())
+                .lastName(userPrincipal.getLastName())
+                .creationDate(userPrincipal.getCreationDate())
+                .lastModificationDate(userPrincipal.getLastModificationDate())
                 .build();
     }
 }

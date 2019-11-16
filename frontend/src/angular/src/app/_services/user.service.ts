@@ -23,24 +23,4 @@ export class UserService {
     userHasRoleAdmin(): boolean {
       return (this.loggedUser.roles.find(role => role.name === 'ROLE_ADMIN') != null);
     }
-
-    doRegister(newUser: string) {
-      return this.http.post(`${config.BACKEND_URL}/user/create`, newUser);
-    }
-
-    doUpdateAccount(changedUser: string) {
-      return this.http.put(`${config.BACKEND_URL}/user/update`, changedUser);
-    }
-
-    doUpdatePassword(changedUser: string) {
-      return this.http.put(`${config.BACKEND_URL}/user/update/password`, changedUser);
-    }
-
-    getAllUsers(userFilter: string, pageNumber: string) {
-      return this.http.post(`${config.BACKEND_URL}/user/getAllFilteredOnPage/?pageNumber=` + pageNumber, userFilter);
-    }
-
-    setActiveOrBanned(userId: string) {
-      return this.http.put(`${config.BACKEND_URL}/user/` + userId + '/ban', '');
-    }
 }

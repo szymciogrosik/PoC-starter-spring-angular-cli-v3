@@ -22,6 +22,8 @@ import com.project.security.JwtTokenProvider;
 import com.project.security.UserPrincipal;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -58,7 +60,7 @@ public class AuthService {
 
         log.info("User with [email: {}] has logged in", userPrincipal.getEmail());
 
-        return new JwtAuthenticationResponse(jwt);
+        return new JwtAuthenticationResponse(jwt, userRepository.findByEmail(userPrincipal.getEmail()).orElseThrow(() -> new AppException("User not found in database.")));
     }
 
     public Long registerUser(SignUpRequest signUpRequest) {
@@ -67,7 +69,16 @@ public class AuthService {
             throw new ConflictException("Email [email: " + signUpRequest.getEmail() + "] is already taken");
         }
 
-        User user = new User(signUpRequest.getName(), signUpRequest.getEmail(), signUpRequest.getPassword());
+        Set<Role> newUserRoles = new HashSet<>();
+        newUserRoles.add(roleRepository.findByName(RoleName.ROLE_USER).orElseThrow(() -> new AppException("Role not found in database.")));
+
+        User user = new User(
+                signUpRequest.getFirstName(),
+                signUpRequest.getLastName(),
+                signUpRequest.getEmail(),
+                signUpRequest.getPassword(),
+                newUserRoles
+        );
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -79,5 +90,5 @@ public class AuthService {
         log.info("Successfully registered user with [email: {}]", user.getEmail());
 
         return userRepository.save(user).getId();
-        }
+    }
 }

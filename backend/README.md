@@ -39,9 +39,10 @@ Content-Type: application/json
 Body
 ``` json
 {
-	"name": "Rafał Mituła",
+	"firstName": "Rafał",
+	"lastName": "Mituła",
 	"email": "rmitula@gmail.com",
-	"password": "password"
+	"password": "admin"
 }
 ```
 

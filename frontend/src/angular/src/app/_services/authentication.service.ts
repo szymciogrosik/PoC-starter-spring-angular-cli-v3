@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../_models';
@@ -21,14 +21,15 @@ export class AuthenticationService {
     }
 
     login(loginData: string) {
-        return this.http.post<any>(`${config.BACKEND_URL}/api/auth`, loginData)
+        return this.http.post<any>(`${config.BACKEND_URL}/api/auth/signin`, loginData, this.getAuthHeader())
             .pipe(map(res => {
-                const user = new User();
+                let user = new User();
                 // login successful if there's a jwt token in the response
-                if (res && res.token) {
+                if (res && res.token && res.user) {
                   // store user details and jwt token in local storage to keep user logged in between page refreshes
-                  user.username = res.username;
+                  user = res.user;
                   user.token = res.token;
+                  console.log(user);
                   localStorage.setItem(`${config.TOKEN_NAME}`, JSON.stringify(user));
                   this.currentUserSubject.next(user);
                 }
@@ -54,5 +55,10 @@ export class AuthenticationService {
       } else {
         return false;
       }
+    }
+
+    getAuthHeader() {
+      const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+      return { headers };
     }
 }
