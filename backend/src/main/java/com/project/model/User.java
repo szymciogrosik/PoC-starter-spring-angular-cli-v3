@@ -1,89 +1,84 @@
 package com.project.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.Setter;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 @Entity
-@Builder
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "email"
+        })
+})
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-public class User implements UserDetails {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String username;
+
+    @NotBlank
+    @Size(max = 40)
+    private String firstName;
+
+    @NotBlank
+    @Size(max = 40)
+    private String lastName;
+
+    @NaturalId
+    @NotBlank
+    @Size(max = 40)
+    @Email
+    private String email;
+
+    @NotBlank
+    @Size(min = 4, max = 100)
     @JsonIgnore
     private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Boolean banned;
-    private Date accountCreationDate;
+
+    //Todo: walidacja daty
+    private Date creationDate;
+
+    //Todo: walidacja daty
     private Date lastModificationDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "User_Role",
-            joinColumns = {@JoinColumn(name = "idUser")},
-            inverseJoinColumns = {@JoinColumn(name = "idRole")})
-    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", accountCreationDate=" + accountCreationDate +
-                ", lastModificationDate=" + lastModificationDate +
-                '}';
+    public User(
+            @NotBlank @Size(max = 40)
+                    String firstName,
+            @NotBlank @Size(max = 40)
+                    String lastName,
+            @NotBlank @Size(max = 40) @Email
+                    String email,
+            @NotBlank @Size(min = 6, max = 100)
+                    String password,
+            @NotBlank
+                    Set<Role> roles
+    ) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.creationDate = new Date();
+        this.lastModificationDate = new Date();
+        this.roles = roles;
     }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        for (Role role : roles) authorities.add(new SimpleGrantedAuthority(role.getName()));
-        return authorities;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isEnabled() {
-        return true;
-    }
-
 }

@@ -1,8 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { AppComponent } from './app.component';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
@@ -10,6 +6,9 @@ import { routing } from './app-routing.module';
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { NavbarComponent } from './navbar';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [

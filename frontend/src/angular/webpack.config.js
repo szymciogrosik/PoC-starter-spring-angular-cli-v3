@@ -15,6 +15,13 @@ module.exports = {
                 test: /\.(html|css)$/,
                 loader: 'raw-loader'
             },
+            {
+              // Added only for resolve angular warning
+              // Mark files inside `@angular/core` as using SystemJS style dynamic imports.
+              // Removing this will cause deprecation warnings to appear.
+              test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
+              parser: { system: true },
+            },
         ]
     },
     resolve: {
@@ -35,7 +42,13 @@ module.exports = {
                 BACKEND_URL: 'http://localhost:8080',
                 TOKEN_NAME: 'loggedUser',
             })
-        })
+        }),
+        // Added only for resolve angular warning
+        new webpack.ContextReplacementPlugin(
+          /angular([\\/])core/,
+          path.resolve(__dirname, 'src/app/'),
+          {}
+        )
     ],
     optimization: {
         splitChunks: {
