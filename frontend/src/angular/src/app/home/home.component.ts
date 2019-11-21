@@ -8,16 +8,14 @@ import {AuthenticationService, UserService} from '../_services';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-  users: User[] = [];
 
-  constructor(private userService: UserService,
-              private authenticationService: AuthenticationService) { }
+export class HomeComponent implements OnInit {
+
+  constructor() { }
 
   ngOnInit() {
-    // this.userService.getAll().pipe(first()).subscribe(users => {
-    //   this.users = users;
-    // });
+
   }
 
 }
+

@@ -8,8 +8,10 @@ import {AuthenticationService} from '../_services';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
   currentUser: User;
+  isCollapse: boolean;
 
   constructor(
     private router: Router,
@@ -19,10 +21,11 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isCollapse = true;
   }
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }
