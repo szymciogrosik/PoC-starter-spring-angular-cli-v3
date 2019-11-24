@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './_models';
+import {RedirectionPath} from '../utils/redirection.path';
 
 @Component({
   selector: 'app-component',
@@ -7,6 +8,5 @@ import { User } from './_models';
   styleUrls: ['app.component.css'] })
 export class AppComponent {
   currentUser: User;
-
   constructor() { }
 }

@@ -8,6 +8,6 @@ export class User {
     email: string;
     creationDate: Date;
     lastModificationDate: Date;
-    token: string;
     roles: Role[];
+    token: string;
 }

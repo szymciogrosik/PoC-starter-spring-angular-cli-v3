@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
+    // Todo: serwis wgl nie uzywany
     loggedUser: User = new User();
     loggedUserSubject = new Subject<User>();
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../_models';
 import { first } from 'rxjs/operators';
-import {AuthenticationService, UserService} from '../_services';
+import {AuthService, UserService} from '../_services';
 
 @Component({
   selector: 'app-home',

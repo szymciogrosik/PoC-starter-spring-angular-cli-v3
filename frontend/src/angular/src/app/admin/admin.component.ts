@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../_models';
-import {AuthenticationService} from '../_services';
+import {AuthService} from '../_services';
 
 @Component({
   selector: 'app-admin',
@@ -13,7 +13,7 @@ export class AdminComponent implements OnInit {
   currentUser: User;
 
   constructor(
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }

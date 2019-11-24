@@ -83,7 +83,6 @@ public class UserPrincipal implements UserDetails {
         return lastModificationDate;
     }
 
-    //Todo: ??? potrzebne??
     @Override
     public String getUsername() {
         return email;
@@ -129,9 +128,6 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(id);
     }
-
-
 }

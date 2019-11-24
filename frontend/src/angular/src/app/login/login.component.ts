@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '../_services';
+import {AuthService} from '../_services';
 import {first} from 'rxjs/operators';
 import {sha512} from 'js-sha512';
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     });
 
     // reset login status
-    this.authenticationService.logout();
+    this.authService.logout();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    this.authenticationService.login(JSON.stringify(this.loginForm.value))
+    this.authService.login(JSON.stringify(this.loginForm.value))
       .pipe(first())
       .subscribe(
         data => {

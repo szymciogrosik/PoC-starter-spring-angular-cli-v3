@@ -26,5 +26,4 @@ public class UserController {
     public UserSummary getCurrentUser(@CurrentUser UserPrincipal currentUser) {
         return userService.getCurrentUser(currentUser);
     }
-
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../_models';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../_services';
+import { User } from '../_models';
+import { Router } from '@angular/router';
+import { AuthService } from '../_services';
+import {RedirectionPath} from '../../utils/redirection.path';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +11,14 @@ import {AuthenticationService} from '../_services';
 })
 
 export class NavbarComponent implements OnInit {
-  currentUser: User;
-  isCollapse: boolean;
+  private currentUser: User;
+  private isCollapse: boolean;
+
+  private rp = RedirectionPath;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }

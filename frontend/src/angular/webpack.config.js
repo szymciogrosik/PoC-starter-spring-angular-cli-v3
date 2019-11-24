@@ -3,18 +3,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = (env, options) => {
-  console.log(`This is the Webpack 4 in ${options.mode} mode.`);
+  console.log(`This is the Webpack in ${options.mode} mode.`);
 
   let config;
   if (`${options.mode}` === `production`) {
     config = JSON.stringify({
       BACKEND_URL: 'http://localhost:8080',
-      TOKEN_NAME: 'UserToken',
+      LOGGED_USER: 'r5Hj5B16Vy1d5VnyArIy',
+      SECRET_USER_KEY: 'VI!pZ9&V@~We#22N5T_8hVp3k04y)08u$#Wd$fxJ',
     });
   } else if (`${options.mode}` === `development`) {
     config = JSON.stringify({
       BACKEND_URL: 'http://localhost:8080',
-      TOKEN_NAME: 'UserToken',
+      LOGGED_USER: 'LoggedUser',
+      SECRET_USER_KEY: 'VI!pZ9&V@~We#22N5T_8hVp3k04y)08u$#Wd$fxJ',
     });
   }
 
