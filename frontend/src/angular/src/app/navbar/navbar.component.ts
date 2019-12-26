@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../_models';
 import {RedirectionPath} from '../../utils/redirection.path';
 import {Router} from '@angular/router';
-import {AuthService} from '../_services';
+import {AuthService, SnackbarService} from '../_services';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +17,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthService
+    private authenticationService: AuthService,
+    private snackbarService: SnackbarService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -28,6 +29,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authenticationService.logout();
+    this.snackbarService.openDefaultSnackBar('Logout successfully');
     this.router.navigate(['/']);
   }
 }
