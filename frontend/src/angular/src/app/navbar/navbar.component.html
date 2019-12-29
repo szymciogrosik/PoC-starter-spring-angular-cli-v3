@@ -1,22 +1,28 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="{{ this.rp.HOME }}">Angular starter</a>
-  <button class="navbar-toggler" (click)="isCollapse=!isCollapse" type="button" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="navbar-collapse" (click)="isCollapse=true" [hidden]="isCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="{{ this.rp.HOME }}" >Home<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="{{ this.rp.ADMIN }}" *ngIf="authenticationService.isLoggedIn()">Admin<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()" *ngIf="authenticationService.isLoggedIn()">Logout<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="{{ this.rp.LOGIN }}" *ngIf="!authenticationService.isLoggedIn()">Sign in<span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
+<mat-toolbar color="primary">
+
+  <button mat-button routerLink="{{ this.rp.HOME }}"><mat-icon>home</mat-icon> Angular starter</button>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+
+  <!-- Full menu navbar -->
+  <div fxLayout="row" fxShow="false" fxShow.gt-xs>
+    <button mat-button routerLink="{{ this.rp.HOME }}">Home</button>
+    <button mat-button routerLink="{{ this.rp.ADMIN }}" *ngIf="authenticationService.isLoggedIn()">Admin</button>
+    <button mat-button (click)="logout()" *ngIf="authenticationService.isLoggedIn()">Logout</button>
+    <button mat-button routerLink="{{ this.rp.LOGIN }}" *ngIf="!authenticationService.isLoggedIn()">Sign in</button>
   </div>
-</nav>
+
+  <!-- Short menu navbar -->
+  <div fxLayout="row" fxHide="false" fxHide.gt-xs>
+    <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+  </div>
+
+</mat-toolbar>
+
+<mat-menu xPosition="before" #menu="matMenu">
+  <button mat-menu-item routerLink="{{ this.rp.HOME }}">Home</button>
+  <button mat-menu-item routerLink="{{ this.rp.ADMIN }}" *ngIf="authenticationService.isLoggedIn()">Admin</button>
+  <button mat-menu-item (click)="logout()" *ngIf="authenticationService.isLoggedIn()">Logout</button>
+  <button mat-menu-item routerLink="{{ this.rp.LOGIN }}" *ngIf="!authenticationService.isLoggedIn()">Sign in</button>
+</mat-menu>

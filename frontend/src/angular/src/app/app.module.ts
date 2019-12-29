@@ -3,7 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatFormFieldModule, MatSliderModule, MatSnackBarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatListModule,
+  MatMenuModule,
+  MatSliderModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatIconModule
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { AdminComponent } from './admin';
 import { HomeComponent } from './home';
@@ -13,6 +23,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor, HttpJwtInterceptor } from './_helpers';
 import { ReactiveFormsModule } from '@angular/forms';
 import { routing } from './app-routing.module';
+import { LayoutModule } from '@angular/cdk/layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -20,7 +32,7 @@ import { routing } from './app-routing.module';
     AdminComponent,
     HomeComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +43,15 @@ import { routing } from './app-routing.module';
     HttpClientModule,
     routing,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatListModule,
+    MatToolbarModule,
+    LayoutModule,
+    MatSidenavModule,
+    MatIconModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpJwtInterceptor, multi: true },
