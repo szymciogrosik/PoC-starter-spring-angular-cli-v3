@@ -8,7 +8,7 @@
   <!-- Full menu navbar -->
   <div fxLayout="row" fxShow="false" fxShow.gt-xs>
     <button mat-button routerLink="{{ this.rp.HOME }}">Home</button>
-    <button mat-button routerLink="{{ this.rp.ADMIN }}" *ngIf="authenticationService.isLoggedIn()">Admin</button>
+    <button mat-button [matMenuTriggerFor]="adminMenu" *ngIf="authenticationService.isLoggedIn()">Admin</button>
     <button mat-button (click)="logout()" *ngIf="authenticationService.isLoggedIn()">Logout</button>
     <button mat-button routerLink="{{ this.rp.LOGIN }}" *ngIf="!authenticationService.isLoggedIn()">Sign in</button>
   </div>
@@ -22,7 +22,12 @@
 
 <mat-menu xPosition="before" #menu="matMenu">
   <button mat-menu-item routerLink="{{ this.rp.HOME }}">Home</button>
-  <button mat-menu-item routerLink="{{ this.rp.ADMIN }}" *ngIf="authenticationService.isLoggedIn()">Admin</button>
+  <button mat-menu-item [matMenuTriggerFor]="adminMenu" *ngIf="authenticationService.isLoggedIn()">Admin</button>
   <button mat-menu-item (click)="logout()" *ngIf="authenticationService.isLoggedIn()">Logout</button>
   <button mat-menu-item routerLink="{{ this.rp.LOGIN }}" *ngIf="!authenticationService.isLoggedIn()">Sign in</button>
+</mat-menu>
+
+<mat-menu xPosition="before" #adminMenu="matMenu">
+  <button mat-menu-item>User details</button>
+  <button mat-menu-item>Change password</button>
 </mat-menu>

@@ -11,7 +11,6 @@ import {AuthService, SnackbarService} from '../_services';
 })
 export class NavbarComponent implements OnInit {
   private currentUser: User;
-  private isCollapse: boolean;
 
   private rp = RedirectionPath;
 
@@ -23,9 +22,7 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
-  ngOnInit() {
-    this.isCollapse = true;
-  }
+  ngOnInit() { }
 
   logout() {
     this.authenticationService.logout();

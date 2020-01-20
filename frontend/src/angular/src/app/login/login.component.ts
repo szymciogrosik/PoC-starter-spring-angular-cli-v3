@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../_services';
+import {AuthService, SnackbarService} from '../_services';
 import {first} from 'rxjs/operators';
 
 @Component({
@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-  error = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackbarService: SnackbarService
   ) { }
 
   ngOnInit() {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error;
+          this.snackbarService.openDefaultSnackBar(error);
           this.loading = false;
         });
   }
