@@ -27,6 +27,8 @@ import { routing } from './app-routing.module';
 import { LayoutModule } from '@angular/cdk/layout';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FooterComponent } from './footer/footer.component';
+import { DetailsComponent } from './admin/details/details.component';
+import { ChangePasswordComponent } from './admin/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { FooterComponent } from './footer/footer.component';
     LoginComponent,
     NavbarComponent,
     FooterComponent,
+    DetailsComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
